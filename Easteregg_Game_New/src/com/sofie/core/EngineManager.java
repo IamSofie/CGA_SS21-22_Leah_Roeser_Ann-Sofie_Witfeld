@@ -16,15 +16,18 @@ public class EngineManager {
     private boolean isRunning;
 
     private WindowManager window;
+    private MouseInput mouseInput;
     private GLFWErrorCallback errorCallback;
     private com.sofie.core.ILogic gameLogic;
 
     private void init() throws Exception{
         GLFW.glfwSetErrorCallback(errorCallback = GLFWErrorCallback.createPrint(System.err));
         window = Launcher.getWindow();
+        mouseInput = new MouseInput();
         gameLogic = Launcher.getGame();
         window.init();
         gameLogic.init();
+        mouseInput.init();
 
     }
     public void start() throws Exception{
@@ -82,7 +85,8 @@ public class EngineManager {
     }
 
     private void input(){
-    gameLogic.input();
+        mouseInput.input();
+        gameLogic.input();
     }
     private void render(){
         gameLogic.render();
@@ -90,7 +94,7 @@ public class EngineManager {
     }
 
     private void update(){
-        gameLogic.update();
+        gameLogic.update(mouseInput);
     }
     private void cleanup(){
         window.cleanup();

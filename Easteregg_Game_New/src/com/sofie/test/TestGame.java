@@ -1,13 +1,12 @@
 package com.sofie.test;
 
-import com.sofie.core.ILogic;
-import com.sofie.core.ObjectLoader;
-import com.sofie.core.RenderManager;
-import com.sofie.core.WindowManager;
+import com.sofie.core.*;
 import com.sofie.core.entity.Camera;
 import com.sofie.core.entity.Entity;
 import com.sofie.core.entity.Model;
 import com.sofie.core.entity.Texture;
+import com.sofie.core.utils.Consts;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
@@ -63,9 +62,13 @@ public class TestGame implements ILogic {
     }
 
     @Override
-    public void update() {
+    public void update(MouseInput mouseInput) {
        camera.movePosition(cameraInc.x * CAMERA_MOVE_SPEED, cameraInc.y * CAMERA_MOVE_SPEED, cameraInc.z * CAMERA_MOVE_SPEED);
 
+       if(mouseInput.isRightButtonPress()){
+           Vector2f rotVec = mouseInput.getDisplVec();
+           camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
+       }
        entity.incRotation(0.0f, 0.5f, 0.0f);
 
     }
