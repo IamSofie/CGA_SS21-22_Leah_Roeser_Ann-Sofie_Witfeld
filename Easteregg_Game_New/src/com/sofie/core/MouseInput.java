@@ -12,6 +12,7 @@ public class MouseInput {
     private final Vector2f displVec;
 
     private boolean inWindow = false, leftButtonPress = false;
+    private boolean isInWindow = false, rightButtonPress = false;
 
     public MouseInput() {
         previousPos = new Vector2d(-1, -1);
@@ -19,21 +20,20 @@ public class MouseInput {
         displVec = new Vector2f();
     }
     public void init(){
-        GLFW.glfwSetCursorPosCallback(Launcher.getWindow().
-                //getWindowHandle(),(window, xpos, ypos) -> {
+        GLFW.glfwSetCursorPosCallback(Launcher.getWindow().getWindow(),(window, xpos, ypos) -> {
                 currentPos.x = xpos;
         currentPos.y = ypos;
     });
-        GLFW.glfwSetCursorEnterCallback(Main.getWindow().getWindowHandle(),(window, entered) -> {
+        GLFW.glfwSetCursorEnterCallback(Launcher.getWindow().getWindow(),(window, entered) -> {
         inWindow = entered;
     });
-        GLFW.glfwSetMouseButtonCallback(Main.getWindow().getWindowHandle(),((window, button, action, mods) -> {
+        GLFW.glfwSetMouseButtonCallback(Launcher.getWindow().getWindow(),(window, button, action, mods) -> {
         leftButtonPress =button == GLFW.GLFW_MOUSE_BUTTON_1 && action == GLFW.GLFW_PRESS;
         rightButtonPress =button == GLFW.GLFW_MOUSE_BUTTON_2 && action == GLFW.GLFW_PRESS;
 
     });
 }
-    public void Input() {
+    public void input() {
         displVec.x = 0;
         displVec.y = 0;
         if(previousPos.x > 0 && previousPos.y > 0 && inWindow){
@@ -54,6 +54,9 @@ public class MouseInput {
     }
     public boolean isLeftButtonPress(){
         return leftButtonPress;
+    }
+    public boolean isRightButtonPress(){
+        return rightButtonPress;
     }
 }
 
