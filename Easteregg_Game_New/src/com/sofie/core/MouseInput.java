@@ -19,19 +19,19 @@ public class MouseInput {
         displVec = new Vector2f();
     }
     public void init(){
-        GLFW.glfwSetCursorPosCallback(Launcher.getWindow().
+        /*GLFW.glfwSetCursorPosCallback(Launcher.getWindow().
                 //getWindowHandle(),(window, xpos, ypos) -> {
                 currentPos.x = xpos;
         currentPos.y = ypos;
     });
-        GLFW.glfwSetCursorEnterCallback(Main.getWindow().getWindowHandle(),(window, entered) -> {
+        GLFW.glfwSetCursorEnterCallback(Main.getWindow().getWindow(),(window, entered) -> {
         inWindow = entered;
     });
-        GLFW.glfwSetMouseButtonCallback(Main.getWindow().getWindowHandle(),((window, button, action, mods) -> {
+        GLFW.glfwSetMouseButtonCallback(Launcher.getWindow().getWindow(),((window, button, action, mods) -> {
         leftButtonPress =button == GLFW.GLFW_MOUSE_BUTTON_1 && action == GLFW.GLFW_PRESS;
         rightButtonPress =button == GLFW.GLFW_MOUSE_BUTTON_2 && action == GLFW.GLFW_PRESS;
 
-    });
+    });*/
 }
     public void Input() {
         displVec.x = 0;
