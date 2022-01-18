@@ -1,13 +1,11 @@
 package com.sofie.core.entity;
 
-<<<<<<< HEAD
+
 import org.joml.Vector3f;
 
-<<<<<<< HEAD
+
 public class Entity {
-    /*public Entity() {
-        System.out.println("Hallo ich bin genervt");
-    }*/
+
 
     private Model model;
     private Vector3f pos, rotation;
@@ -59,17 +57,6 @@ public class Entity {
     public float getScale() {
         return scale;
     }
-=======
-    public Entity(){
-        System.out.println("HAllo Test");
-    }
     
->>>>>>> a72a6d0a6d30108e9fbc046286ebcb9aa3ec5e9c
-=======
-public class Entity {
-    public Entity() {
 
-        System.out.println("Hallo"); 
-    }
->>>>>>> temporary
 }
