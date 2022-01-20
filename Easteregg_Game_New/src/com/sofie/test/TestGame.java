@@ -43,7 +43,7 @@ public class TestGame implements ILogic {
     public void init() throws Exception {
         renderer.init();
         Model model = loader.loadOBJModel("/resources/models/neptune.obj");
-        model.setTexture(new Texture(loader.loadTexture("textures/blue.png")));
+        model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
         entity = new Entity(model, new Vector3f(1, 0, -250), new Vector3f(0, 0, 0), 1);
         float lightIntensity = 0.0f;
         Vector3f lightPosition = new Vector3f(-1,-10,0);
@@ -80,7 +80,9 @@ public class TestGame implements ILogic {
            Vector2f rotVec = mouseInput.getDisplVec();
            camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
        }
-       //entity.incRotation(0.0f, 0.5f, 0.0f);
+
+        entity.incRotation(0.0f, 0.25f, 0.0f);
+
         lightAngle += 0.5f;
        if (lightAngle > 90){
            directionalLight.setIntensity(0);
@@ -100,20 +102,13 @@ public class TestGame implements ILogic {
        double angRad = Math.toRadians(lightAngle);
        directionalLight.getDirection().x = (float) Math.sin(angRad);
        directionalLight.getDirection().y = (float) Math.cos(angRad);
-
-
-
     }
 
     @Override
     public void render() {
-        if (window.isResize()){
-            GL11.glViewport(0, 0, window.getWidth(), window.getHeight());
-            window.setResize(true);
-        }
-
-        window.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         renderer.render(entity, camera, directionalLight);
+
+
     }
 
     @Override

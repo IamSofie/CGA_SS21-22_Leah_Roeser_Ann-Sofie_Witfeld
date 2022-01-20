@@ -1,10 +1,12 @@
 package com.sofie.core.lighting;
 
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class DirectionalLight {
 
-    Vector3f colour, direction;
+    private Vector3f colour, direction;
     private float intensity;
 
     public DirectionalLight(Vector3f colour, Vector3f direction, float intensity) {
