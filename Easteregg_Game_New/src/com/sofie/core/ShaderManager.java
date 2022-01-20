@@ -1,5 +1,6 @@
 package com.sofie.core;
 
+import com.sofie.core.entity.Material;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -30,7 +31,13 @@ public class ShaderManager {
         uniforms.put(uniformName, uniformLocation);
     }
 
-
+    public void createMaterialUniform(String uniformName) throws Exception{
+        createUniform(uniformName + ".ambient");
+        createUniform(uniformName + ".diffuse");
+        createUniform(uniformName + ".specular");
+        createUniform(uniformName + ".texture");
+        createUniform(uniformName + ".reflect");
+    }
     public void setUniform(String uniformname, Matrix4f value) {
         try(MemoryStack stack = MemoryStack.stackPush()){
             GL20.glUniformMatrix4fv(uniforms.get(uniformname), false,
@@ -61,7 +68,13 @@ public class ShaderManager {
         GL20.glUniform1f(uniforms.get(uniformName), value);
     }
 
-
+    public void setUniform(String uniformName, Material material){
+        setUniform(uniformName + ".ambient",material.getAmbientColor());
+        setUniform(uniformName + ".diffuse", material.getDiffuseColor());
+        setUniform(uniformName + ".specular", material.getSpecularColor());
+        setUniform(uniformName + ".texture", material.getTexture()? 1 : 0);
+        setUniform(uniformName + ".reflect", material.getReflect());
+    }
 
     public void createVertexShader(String shaderCode) throws Exception{
         vertexShaderID = createShader(shaderCode, GL20.GL_VERTEX_SHADER);
