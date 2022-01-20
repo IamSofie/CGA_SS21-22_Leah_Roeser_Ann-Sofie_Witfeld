@@ -2,6 +2,7 @@ package com.sofie.core;
 
 import com.sofie.core.entity.Camera;
 import com.sofie.core.entity.Entity;
+import com.sofie.core.entity.Material;
 import com.sofie.core.entity.Model;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.utils.Consts;

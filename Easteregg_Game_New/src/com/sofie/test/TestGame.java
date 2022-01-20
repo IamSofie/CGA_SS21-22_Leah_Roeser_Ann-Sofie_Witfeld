@@ -1,15 +1,13 @@
 package com.sofie.test;
 
 import com.sofie.core.*;
-import com.sofie.core.entity.Camera;
-import com.sofie.core.entity.Entity;
-import com.sofie.core.entity.Model;
-import com.sofie.core.entity.Texture;
+import com.sofie.core.entity.*;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.utils.Consts;
 import jdk.swing.interop.LightweightContentWrapper;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
@@ -81,7 +79,7 @@ public class TestGame implements ILogic {
            camera.moveRotation(rotVec.x * Consts.MOUSE_SENSITIVITY, rotVec.y * Consts.MOUSE_SENSITIVITY, 0);
        }
 
-        entity.incRotation(0.0f, 0.25f, 0.0f);
+        //entity.incRotation(0.0f, 0.25f, 0.0f);
 
         lightAngle += 0.5f;
        if (lightAngle > 90){
@@ -99,7 +97,7 @@ public class TestGame implements ILogic {
            directionalLight.getColour().y = 1;
            directionalLight.getColour().z = 1;
        }
-       double angRad = Math.toRadians(lightAngle);
+       double angRad = Math.toRadians(lightAngle);                      //cycle
        directionalLight.getDirection().x = (float) Math.sin(angRad);
        directionalLight.getDirection().y = (float) Math.cos(angRad);
     }

@@ -6,19 +6,19 @@ import org.joml.Vector4f;
 
 public class Material{
 
-    private Vector4f ambientColor, diffuseColor, specularColor;
+    private Vector4f ambientColour, diffuseColour, specularColour;
     private float reflect;
     private Texture texture;
 
     public Material(){
-        this.ambientColor = Consts.DEFAULT_COLOUR;
-        this.diffuseColor = Consts.DEFAULT_COLOUR;
-        this.specularColor = Consts.DEFAULT_COLOUR;
+        this.ambientColour = Consts.DEFAULT_COLOUR;
+        this.diffuseColour = Consts.DEFAULT_COLOUR;
+        this.specularColour = Consts.DEFAULT_COLOUR;
         this.texture = null;
         this.reflect = 0;
     }
-    public Material(Vector4f color, float reflect){
-        this(color,color,color,reflect, null);
+    public Material(Vector4f colour, float reflect){
+        this(colour,colour,colour,reflect, null);
     }
 
     public Material(Vector4f colour, float reflect,Texture texture){
@@ -29,50 +29,50 @@ public class Material{
         this(Consts.DEFAULT_COLOUR, Consts.DEFAULT_COLOUR, Consts.DEFAULT_COLOUR, 0, texture);
     }
 
-    public Material(Vector4f ambientColor, Vector4f diffuseColor, Vector4f specularColor, float reflect, Texture texture){
-        this.ambientColor = ambientColor;
-        this.diffuseColor = diffuseColor;
-        this.specularColor = specularColor;
+    public Material(Vector4f ambientColour, Vector4f diffuseColour, Vector4f specularColour, float reflect, Texture texture){
+        this.ambientColour = ambientColour;
+        this.diffuseColour = diffuseColour;
+        this.specularColour = specularColour;
         this.reflect = reflect;
         this.texture = texture;
     }
-    public Vector4f getAmbientColor(){
-        return ambientColor;
+    public Vector4f getAmbientColour(){
+        return ambientColour;
     }
 
-    public void setAmbientColor(Vector4f ambientColor){
-        this.ambientColor = ambientColor;
+    public void setAmbientColour(Vector4f ambientColour){
+        this.ambientColour = ambientColour;
     }
 
-    public Vector4f getDiffuseColor(){
-        return diffuseColor;
+    public Vector4f getDiffuseColour(){
+        return diffuseColour;
     }
 
-    public void setDiffuseColor(Vector4f diffuseColor){
-        this.diffuseColor = diffuseColor;
+    public void setDiffuseColour(Vector4f diffuseColour) {
+        this.diffuseColour = diffuseColour;
     }
 
-    public Vector4f getSpecularColor(){
-        return specularColor;
+    public Vector4f getSpecularColour() {
+        return specularColour;
     }
 
-    public void setSpecularColor(Vector4f specularColor){
-        this.specularColor = specularColor;
+    public void setSpecularColour(Vector4f specularColour) {
+        this.specularColour = specularColour;
     }
 
-    public float getReflect(){
+    public float getReflect() {
         return reflect;
     }
 
-    public void setReflect(float reflect){
+    public void setReflect(float reflect) {
         this.reflect = reflect;
     }
 
-    public Texture getTexture(){
+    public Texture getTexture() {
         return texture;
     }
 
-    public void setTexture(Texture texture){
+    public void setTexture(Texture texture) {
         this.texture = texture;
     }
 

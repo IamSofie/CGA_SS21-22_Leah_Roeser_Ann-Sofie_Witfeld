@@ -44,8 +44,8 @@ public class ShaderManager {
 
     public void createDirectionalLightUniform(String uniformName) throws Exception{
         createUniform(uniformName + ".colour");
-        createUniform(".direction");
-        createUniform(".intensity");
+        createUniform(uniformName +".direction");
+        createUniform(uniformName+ ".intensity");
     }
 
     public void setUniform(String uniformName, Matrix4f value) {
@@ -63,28 +63,11 @@ public class ShaderManager {
         GL20.glUniform1f(uniforms.get(uniformName), res);
     }
 
-    public void setUniforms(String uniformName, Vector3f value){
-        GL20.glUniform3f(uniforms.get(uniformName), value.x, value.y, value.z);
-    }
-
-    public void setUniforms(String uniformName, Vector4f value){
-        GL20.glUniform4f(uniforms.get(uniformName), value.x, value.y, value.z, value.w);
-    }
-
-    public void  setUniform(String uniformName, int value){
-        GL20.glUniform1i(uniforms.get(uniformName), value);
-    }
-
-    public void  setUniform(String uniformName, float value){
-        GL20.glUniform1f(uniforms.get(uniformName), value);
-    }
-
-
-    public void setUniform(String uniformName, Material material){
-        setUniform(uniformName + ".ambient", material.getAmbientColor());
-        setUniform(uniformName + ".diffuse", material.getDiffuseColor());
-        setUniform(uniformName + ".specular", material.getSpecularColor());
-        setUniform(uniformName + ".hasTexture", material.hasTexture()? 1 : 0);
+    public void setUniform(String uniformName, Material material) {
+        setUniform(uniformName + ".ambient", material.getAmbientColour());
+        setUniform(uniformName + ".diffuse", material.getDiffuseColour());
+        setUniform(uniformName + ".specular", material.getSpecularColour());
+        setUniform(uniformName + ".hasTexture", material.hasTexture());
         setUniform(uniformName + ".reflect", material.getReflect());
     }
 
@@ -95,6 +78,21 @@ public class ShaderManager {
 
     }
 
+    public void setUniform(String uniformName, Vector3f value){
+        GL20.glUniform3f(uniforms.get(uniformName), value.x, value.y, value.z);
+    }
+
+    public void setUniform(String uniformName, Vector4f value){
+        GL20.glUniform4f(uniforms.get(uniformName), value.x, value.y, value.z, value.w);
+    }
+
+    public void  setUniform(String uniformName, int value){
+        GL20.glUniform1i(uniforms.get(uniformName), value);
+    }
+
+    public void  setUniform(String uniformName, float value){
+        GL20.glUniform1f(uniforms.get(uniformName), value);
+    }
 
     public void createVertexShader(String shaderCode) throws Exception{
         vertexShaderID = createShader(shaderCode, GL20.GL_VERTEX_SHADER);
