@@ -1,5 +1,6 @@
 package com.sofie.core;
 
+import com.sofie.core.lighting.DirectionalLight;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -28,6 +29,12 @@ public class ShaderManager {
         if(uniformLocation < 0)
             throw new Exception("Uniform kann nicht gefunden werden " + uniformName);
         uniforms.put(uniformName, uniformLocation);
+    }
+
+    public void createDirectionalLightUniform(String uniformName) throws Exception{
+        createUniform(uniformName + ".colour");
+        createUniform(".direction");
+        createUniform(".intensity");
     }
 
 
@@ -59,6 +66,13 @@ public class ShaderManager {
 
     public void  setUniform(String uniformName, float value){
         GL20.glUniform1f(uniforms.get(uniformName), value);
+    }
+
+    public void setUniform(String uniformName, DirectionalLight directionalLight){
+        setUniform(uniformName + ".colour", directionalLight.getColour());
+        setUniform(uniformName + ".direction", directionalLight.getDirection());
+        setUniform(uniformName + ".intensity", directionalLight.getIntensity());
+
     }
 
 

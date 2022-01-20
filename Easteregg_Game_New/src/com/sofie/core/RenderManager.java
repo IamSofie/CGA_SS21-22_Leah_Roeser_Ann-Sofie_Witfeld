@@ -3,6 +3,8 @@ package com.sofie.core;
 import com.sofie.core.entity.Camera;
 import com.sofie.core.entity.Entity;
 import com.sofie.core.entity.Model;
+import com.sofie.core.lighting.DirectionalLight;
+import com.sofie.core.utils.Consts;
 import com.sofie.core.utils.Transformation;
 import com.sofie.core.utils.Utils;
 import com.sofie.test.Launcher;
@@ -28,12 +30,14 @@ public class RenderManager {
         shader.createUniform("transformationMatrix");
         shader.createUniform("projectionMatrix");
         shader.createUniform("viewMatrix");
-        //
-        //
+        shader.createUniform("specularPower");
+        shader.createDirectionalLightUniform("directionalLight");
+
+
 
     }
 
-    public void render(Entity entity, Camera camera){
+    public void render(Entity entity, Camera camera, DirectionalLight directionalLight){
         clear();
         shader.bind();
 
@@ -41,6 +45,9 @@ public class RenderManager {
         shader.setUniform("transformationMatrix", Transformation.createTransformationMatrix(entity));
         shader.setUniform("projectionMatrix", window.updateProjectionMatrix());
         shader.setUniform("viewMatrix", Transformation.getViewMatrix(camera));
+
+        shader.setUniform("specularPower", Consts.SPECULAR_POWER);
+        shader.setUniform("directionalLight", directionalLight);
 
         GL30.glBindVertexArray(entity.getModel().getId());
         GL20.glEnableVertexAttribArray(0);
