@@ -5,6 +5,7 @@ import com.sofie.core.entity.Entity;
 import com.sofie.core.entity.Material;
 import com.sofie.core.entity.Model;
 import com.sofie.core.lighting.DirectionalLight;
+import com.sofie.core.lighting.SpotLight;
 import com.sofie.core.utils.Consts;
 import com.sofie.core.utils.Transformation;
 import com.sofie.core.utils.Utils;
@@ -36,9 +37,11 @@ public class RenderManager {
         shader.createUniform("specularPower");
         shader.createDirectionalLightUniform("directionalLight");
 
+        shader.createSpotLightUniform("spotLight");
+
     }
 
-    public void render(Entity entity, Camera camera, DirectionalLight directionalLight){
+    public void render(Entity entity, Camera camera, DirectionalLight directionalLight, SpotLight spotLight){
         clear();
         if(window.isResize()){
             GL11.glViewport(0,0,window.getWidth(), window.getWidth());
@@ -53,6 +56,8 @@ public class RenderManager {
         shader.setUniform("ambientLight", Consts.AMBIENT_LIGHT);
         shader.setUniform("specularPower", Consts.SPECULAR_POWER);
         shader.setUniform("directionalLight", directionalLight);
+
+        shader.setUniform("spotLight", spotLight);
 
 
         GL30.glBindVertexArray(entity.getModel().getId());
