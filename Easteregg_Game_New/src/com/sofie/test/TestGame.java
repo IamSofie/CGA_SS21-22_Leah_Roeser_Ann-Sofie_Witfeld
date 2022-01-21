@@ -4,6 +4,8 @@ import com.sofie.core.*;
 import com.sofie.core.entity.*;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.SpotLight;
+import com.sofie.core.lighting.PointLight;
+
 import com.sofie.core.utils.Consts;
 import jdk.swing.interop.LightweightContentWrapper;
 import org.joml.Vector2f;
@@ -28,6 +30,8 @@ public class TestGame implements ILogic {
     private float lightAngle;
     private DirectionalLight directionalLight;
     private SpotLight spotLight;
+    private PointLight pointLight;
+
 
 
     public TestGame() {
@@ -47,47 +51,63 @@ public class TestGame implements ILogic {
         entity = new Entity(model, new Vector3f(1, 0, -250), new Vector3f(0, 0, 0), 1);
         float lightIntensity = 1.0f;
 
-        //point light
 
+        //point light
+        Vector3f lightPosition = new Vector3f(0,0, -3.2f);
+        Vector3f lightColour = new Vector3f(1,1,1);
+        pointLight = new PointLight(lightColour, lightPosition, lightIntensity, 0,0,1);
 
         //spot light
         Vector3f coneDir = new Vector3f(0,0,1);
         float cutoff = (float) Math.cos(Math.toRadians(180));
-        spotLight = new SpotLight(new Pointlight(LightColour, new Vector3f(0,0,1f),
+        spotLight = new SpotLight(new PointLight(lightColour, new Vector3f(0,0,1f),
                 lightIntensity, 0,0,1), coneDir, cutoff);
 
+
         //directional light
-        Vector3f lightPosition = new Vector3f(-1,-10,0);
-        Vector3f lightColour = new Vector3f(1,1,1);
+        lightPosition = new Vector3f(-1,-10,0);
+        lightColour = new Vector3f(1,1,1);
         directionalLight = new DirectionalLight(lightColour, lightPosition, lightIntensity);
+
+
+
     }
 
     @Override
     public void input() {
-    cameraInc.set(0,0,0);
+        cameraInc.set(0, 0, 0);
 
-        if(window.isKeyPressed(GLFW.GLFW_KEY_W))
+        if (window.isKeyPressed(GLFW.GLFW_KEY_W))
             cameraInc.z = -1;
-         if(window.isKeyPressed(GLFW.GLFW_KEY_S))
+        if (window.isKeyPressed(GLFW.GLFW_KEY_S))
             cameraInc.z = 1;
 
-        if(window.isKeyPressed(GLFW.GLFW_KEY_A))
+        if (window.isKeyPressed(GLFW.GLFW_KEY_A))
             cameraInc.x = -1;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_D))
+        if (window.isKeyPressed(GLFW.GLFW_KEY_D))
             cameraInc.x = 1;
 
-        if(window.isKeyPressed(GLFW.GLFW_KEY_Z))
+        if (window.isKeyPressed(GLFW.GLFW_KEY_Z))
             cameraInc.y = -1;
 
-        if(window.isKeyPressed(GLFW.GLFW_KEY_X))
+        if (window.isKeyPressed(GLFW.GLFW_KEY_X))
             cameraInc.y = 1;
 
-        float lightPos = spotLight.getPointLight().getPosition().z;
-        if(window.isKeyPressed(GLFW.GLFW_KEY_N)){
-            spotLight.getPointLight().getPosition().z = lightPos +0.1f;
+        /*if(window.isKeyPressed(GLFW.GLFW_KEY_O)){
+            pointLight.getPosition().x += 0.1f;
         }
-        if (window.isKeyPressed(GLFW.GLFW_KEY_M)){
-            spotLight.getPointLight().getPosition().z = lightPos -0.1f;
+
+        if(window.isKeyPressed(GLFW.GLFW_KEY_P)) {
+            pointLight.getPosition().x -= 0.1f;
+        }*/
+
+        float lightPos = spotLight.getPointLight().getPosition().z;
+        if (window.isKeyPressed(GLFW.GLFW_KEY_N)) {
+            spotLight.getPointLight().getPosition().z = lightPos + 0.1f;
+        }
+        if (window.isKeyPressed(GLFW.GLFW_KEY_M)) {
+            spotLight.getPointLight().getPosition().z = lightPos - 0.1f;
+
         }
     }
 
@@ -125,9 +145,7 @@ public class TestGame implements ILogic {
 
     @Override
     public void render() {
-        renderer.render(entity, camera, directionalLight, spotLight);
-
-
+        renderer.render(entity, camera, directionalLight, pointLight, spotLight);
     }
 
     @Override
