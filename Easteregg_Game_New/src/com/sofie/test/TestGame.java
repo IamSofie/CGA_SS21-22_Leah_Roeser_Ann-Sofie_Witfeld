@@ -27,8 +27,9 @@ public class TestGame implements ILogic {
 
     private float lightAngle;
     private DirectionalLight directionalLight;
-    private SpotLight spotLight;
     private PointLight pointLight;
+    private SpotLight spotLight;
+
 
 
 
@@ -44,16 +45,17 @@ public class TestGame implements ILogic {
     @Override
     public void init() throws Exception {
         renderer.init();
-        Model model = loader.loadOBJModel("/resources/models/neptune.obj");
+        Model model = loader.loadOBJModel("/resources/models/fence.obj");
         model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
-        entity = new Entity(model, new Vector3f(1, 0, -250), new Vector3f(0, 0, 0), 1);
-        float lightIntensity = 1.0f;
+        entity = new Entity(model, new Vector3f(1, 0, -1), new Vector3f(0, 0, 0), 1);
+
 
 
         //point light
+        float lightIntensity = 1.0f;
         Vector3f lightPosition = new Vector3f(0,0, -3.2f);
         Vector3f lightColour = new Vector3f(1,1,1);
-        pointLight = new PointLight(lightColour, lightPosition, lightIntensity, 0,0,1);
+        pointLight = new PointLight(lightColour, lightPosition, lightIntensity, 0,1,1);
 
         //spot light
         Vector3f coneDir = new Vector3f(0,0,1);
@@ -91,13 +93,13 @@ public class TestGame implements ILogic {
         if (window.isKeyPressed(GLFW.GLFW_KEY_X))
             cameraInc.y = 1;
 
-        /*if(window.isKeyPressed(GLFW.GLFW_KEY_O)){
+        if(window.isKeyPressed(GLFW.GLFW_KEY_O)){
             pointLight.getPosition().x += 0.1f;
         }
 
         if(window.isKeyPressed(GLFW.GLFW_KEY_P)) {
             pointLight.getPosition().x -= 0.1f;
-        }*/
+        }
 
         float lightPos = spotLight.getPointLight().getPosition().z;
         if (window.isKeyPressed(GLFW.GLFW_KEY_N)) {
