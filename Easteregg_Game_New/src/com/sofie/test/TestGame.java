@@ -7,12 +7,10 @@ import com.sofie.core.lighting.SpotLight;
 import com.sofie.core.lighting.PointLight;
 
 import com.sofie.core.utils.Consts;
-import jdk.swing.interop.LightweightContentWrapper;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
+
 
 public class TestGame implements ILogic {
 
@@ -23,7 +21,7 @@ public class TestGame implements ILogic {
     private final WindowManager window;
 
     private Entity entity;
-    private Camera camera;
+    private final Camera camera;
 
     Vector3f cameraInc;
 

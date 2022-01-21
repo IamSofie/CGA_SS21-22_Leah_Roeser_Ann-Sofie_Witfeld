@@ -106,7 +106,6 @@ vec3 to_light_dir = normalize(light_dir);
 vec3 from_light_dir = -to_light_dir;
 float spot_alfa = dot(from_light_dir, normalize(light.conedir));
 
-
 vec4 colour = vec4(0,0,0,0);
 
 if(spot_alfa > light.cutoff){
