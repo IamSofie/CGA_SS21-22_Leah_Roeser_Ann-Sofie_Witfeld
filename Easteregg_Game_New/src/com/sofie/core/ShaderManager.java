@@ -105,7 +105,7 @@ public class ShaderManager {
     public void setUniform(String uniformName, SpotLight spotLight){
         setUniform(uniformName + ".pl", spotLight.getPointLight());
         setUniform(uniformName + ".conedir", spotLight.getConeDirection());
-        setUniform( uniformName + "cutoff", spotLight.getCutoff());
+        setUniform( uniformName + ".cutoff", spotLight.getCutoff());
     }
 
     public void setUniform(String uniformName, Vector3f value){

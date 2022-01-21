@@ -36,7 +36,6 @@ public class RenderManager {
         shader.createUniform("specularPower");
         shader.createDirectionalLightUniform("directionalLight");
         shader.createPointLightUniform("pointLight");
-
         shader.createSpotLightUniform("spotLight");
 
     }

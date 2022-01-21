@@ -2,7 +2,6 @@ package com.sofie.core;
 
 import com.sofie.core.utils.Consts;
 import com.sofie.test.Launcher;
-import com.sofie.core.utils.Consts;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 
