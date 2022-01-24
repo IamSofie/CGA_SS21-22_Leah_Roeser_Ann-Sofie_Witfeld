@@ -11,6 +11,10 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 
 public class TestGame implements ILogic {
 
@@ -20,7 +24,7 @@ public class TestGame implements ILogic {
     private final ObjectLoader loader;
     private final WindowManager window;
 
-    private Entity entity;
+    private List<Entity> entities;
     private final Camera camera;
 
     Vector3f cameraInc;
@@ -45,9 +49,20 @@ public class TestGame implements ILogic {
     @Override
     public void init() throws Exception {
         renderer.init();
+
         Model model = loader.loadOBJModel("/resources/models/bunny.obj");
         model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
-        entity = new Entity(model, new Vector3f(1,0 , -10), new Vector3f(0, 0, 0), 1);
+
+        entities = new ArrayList<>();
+        Random rnd = new Random();
+        for(int i = 0; i < 200; i++){
+            float x = rnd.nextFloat() * 100 -50;
+            float y = rnd.nextFloat() * 100 -50;
+            float z = rnd.nextFloat() * -300;
+            entities.add(new Entity(model, new Vector3f(x,y,z),
+            new Vector3f(rnd.nextFloat() * 180, rnd.nextFloat() * 180, 0), 1));
+        }
+        entities.add(new Entity(model, new Vector3f(0,0, -2f), new Vector3f(0,0,0),1));
 
         //point light
         float lightIntensity = 1.0f;
@@ -151,11 +166,15 @@ public class TestGame implements ILogic {
        double angRad = Math.toRadians(lightAngle);                      //cycle
        directionalLight.getDirection().x = (float) Math.sin(angRad);
        directionalLight.getDirection().y = (float) Math.cos(angRad);
+
+       for(Entity entity : entities){
+           renderer.processEntity(entity);
+       }
     }
 
     @Override
     public void render() {
-        renderer.render(entity, camera, directionalLight, pointLights, spotLights);
+        renderer.render(camera, directionalLight, pointLights, spotLights);
     }
 
     @Override
