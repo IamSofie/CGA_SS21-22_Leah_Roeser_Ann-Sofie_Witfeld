@@ -6,6 +6,7 @@ import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.SpotLight;
 import com.sofie.core.lighting.PointLight;
 
+import com.sofie.core.rendering.RenderManager;
 import com.sofie.core.utils.Consts;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
