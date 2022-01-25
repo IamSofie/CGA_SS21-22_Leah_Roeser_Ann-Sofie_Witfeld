@@ -2,6 +2,7 @@ package com.sofie.test;
 
 import com.sofie.core.*;
 import com.sofie.core.entity.*;
+import com.sofie.core.entity.terrain.Terrain;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.SpotLight;
 import com.sofie.core.lighting.PointLight;
@@ -26,6 +27,7 @@ public class TestGame implements ILogic {
     private final WindowManager window;
 
     private List<Entity> entities;
+    private List<Terrain> terrains;
     private final Camera camera;
 
     Vector3f cameraInc;
@@ -53,6 +55,12 @@ public class TestGame implements ILogic {
 
         Model model = loader.loadOBJModel("/resources/models/bunny.obj");
         model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
+
+        terrains = new ArrayList<>();
+        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
+        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
+        terrains.add(terrain); terrains.add(terrain2);
+
 
         entities = new ArrayList<>();
         Random rnd = new Random();
@@ -170,6 +178,10 @@ public class TestGame implements ILogic {
 
        for(Entity entity : entities){
            renderer.processEntity(entity);
+       }
+
+       for (Terrain terrain : terrains){
+           renderer.processTerrain(terrain);
        }
     }
 

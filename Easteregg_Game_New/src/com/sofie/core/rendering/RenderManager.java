@@ -4,6 +4,7 @@ import com.sofie.core.ShaderManager;
 import com.sofie.core.WindowManager;
 import com.sofie.core.entity.Camera;
 import com.sofie.core.entity.Entity;
+import com.sofie.core.entity.terrain.Terrain;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.SpotLight;
 import com.sofie.core.lighting.PointLight;
@@ -17,6 +18,7 @@ import java.util.List;
 public class RenderManager {
     private final WindowManager window;
     private EntityRender entityRenderer;
+    private TerrainRenderer terrainRenderer;
 
 
     public RenderManager() {
@@ -25,8 +27,9 @@ public class RenderManager {
 
     public void init() throws Exception{
         entityRenderer = new EntityRender();
-
+        terrainRenderer = new TerrainRenderer();
         entityRenderer.init();
+        terrainRenderer.init();
 
     }
 
@@ -54,6 +57,7 @@ public class RenderManager {
         }
 
         entityRenderer.render(camera, pointLights, spotLights, directionalLight);
+        terrainRenderer.render(camera, pointLights, spotLights, directionalLight);
 
     }
 
@@ -67,12 +71,17 @@ public class RenderManager {
             entityRenderer.getEntities().put(entity.getModel(), newEntityList);
         }
     }
+    public void processTerrain(Terrain terrain){
+        terrainRenderer.getTerrain().add(terrain);
+    }
+
     public void clear(){
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
     }
 
     public void cleanup(){
         entityRenderer.cleanup();
+        terrainRenderer.cleanup();
 
     }
 }

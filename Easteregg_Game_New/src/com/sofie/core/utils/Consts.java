@@ -9,6 +9,9 @@ public class Consts {
     public static final float Z_FAR = 1000f;
     public static final float SPECULAR_POWER = 10f;
 
+    public static final int MAX_SPOT_LIGHTS = 5;
+    public static final int MAX_POINT_LIGHTS = 5;
+
 
     public static final String TITLE = "Find some Easter Eggs";
 
