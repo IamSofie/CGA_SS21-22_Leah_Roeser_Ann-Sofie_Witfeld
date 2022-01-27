@@ -45,8 +45,9 @@ public class TestGame implements ILogic {
         renderer.init();
 
         Model model = loader.loadOBJModel("/resources/models/cubee.obj");
+        model.getMaterial().setDisableCulling(true);
         model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")), 1f);
-        
+
         Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
         Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
         sceneManager.addTerrain(terrain);
