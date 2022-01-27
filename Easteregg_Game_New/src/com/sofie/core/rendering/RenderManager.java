@@ -17,7 +17,7 @@ import java.util.List;
 
 public class RenderManager {
     private final WindowManager window;
-    private EntityRender entityRenderer;
+    private EntityRenderer entityRenderer;
     private TerrainRenderer terrainRenderer;
 
 
@@ -26,7 +26,7 @@ public class RenderManager {
     }
 
     public void init() throws Exception{
-        entityRenderer = new EntityRender();
+        entityRenderer = new EntityRenderer();
         terrainRenderer = new TerrainRenderer();
         entityRenderer.init();
         terrainRenderer.init();

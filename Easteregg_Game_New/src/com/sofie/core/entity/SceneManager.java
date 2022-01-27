@@ -1,5 +1,6 @@
 package com.sofie.core.entity;
 
+import com.sofie.core.entity.terrain.Terrain;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.PointLight;
 import com.sofie.core.lighting.SpotLight;
@@ -12,7 +13,7 @@ import java.util.Vector;
 
 public class SceneManager {
 
-    private List<Entity> entities;
+    /*private List<Entity> entities;
     private List<Terrain> terrains;
 
     private Vector3f ambientLight;
@@ -54,7 +55,7 @@ public class SceneManager {
         this.ambientLight = ambientLight;
     }
     public void setAmbientLight(float x, float y, float z){
-        ambientLight = new Vector3f(x,y,z)
+        ambientLight = new Vector3f(x,y,z);
     }
 
     public SpotLight[] getSpotLights() {
@@ -103,5 +104,5 @@ public class SceneManager {
 
     public void setSpotInc(float spotInc) {
         this.spotInc = spotInc;
-    }
+    }*/
 }

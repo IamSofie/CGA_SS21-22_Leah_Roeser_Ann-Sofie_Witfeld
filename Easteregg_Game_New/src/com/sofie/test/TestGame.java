@@ -53,12 +53,14 @@ public class TestGame implements ILogic {
     public void init() throws Exception {
         renderer.init();
 
-        Model model = loader.loadOBJModel("/resources/models/bunny.obj");
-        model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
+        Model model = loader.loadOBJModel("/resources/models/cubee.obj");
+        model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")), 1f);
 
         terrains = new ArrayList<>();
-        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
-        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
+        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material
+                (new Texture(loader.loadTexture("textures/grass.png")), 0.1f));
+        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material
+                (new Texture(loader.loadTexture("textures/wiese.png")), 0.1f));
         terrains.add(terrain); terrains.add(terrain2);
 
 
@@ -68,10 +70,10 @@ public class TestGame implements ILogic {
             float x = rnd.nextFloat() * 100 -50;
             float y = rnd.nextFloat() * 100 -50;
             float z = rnd.nextFloat() * -300;
-            entities.add(new Entity(model, new Vector3f(x,y,z),
+            entities.add(new Entity(model, new Vector3f(0,5,5),
             new Vector3f(rnd.nextFloat() * 180, rnd.nextFloat() * 180, 0), 1));
         }
-        entities.add(new Entity(model, new Vector3f(0,0, -2f), new Vector3f(0,0,0),1));
+        entities.add(new Entity(model, new Vector3f(0,0, 5), new Vector3f(0,0,0),1));
 
         //point light
         float lightIntensity = 1.0f;
@@ -133,14 +135,13 @@ public class TestGame implements ILogic {
             pointLights[0].getPosition().z -= 0.1f;
         }
 
-        /*float lightPos = spotLights[0].getPointLight().getPosition().z;
+        float lightPos = spotLights[0].getPointLight().getPosition().z;
         if (window.isKeyPressed(GLFW.GLFW_KEY_N)) {
             spotLights[0].getPointLight().getPosition().z = lightPos + 0.1f;
         }
         if (window.isKeyPressed(GLFW.GLFW_KEY_M)) {
             spotLights[0].getPointLight().getPosition().z = lightPos - 0.1f;
-
-        }*/
+        }
     }
 
     @Override

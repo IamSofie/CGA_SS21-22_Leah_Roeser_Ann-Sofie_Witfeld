@@ -2,7 +2,7 @@ package com.sofie.core.rendering;
 
 import com.sofie.core.ShaderManager;
 import com.sofie.core.entity.Camera;
-import com.sofie.core.entity.Entity;
+
 import com.sofie.core.entity.Model;
 import com.sofie.core.entity.terrain.Terrain;
 import com.sofie.core.lighting.DirectionalLight;
@@ -12,20 +12,20 @@ import com.sofie.core.utils.Consts;
 import com.sofie.core.utils.Transformation;
 import com.sofie.core.utils.Utils;
 import com.sofie.test.Launcher;
+import groovyjarjarantlr4.v4.tool.ast.TerminalAST;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class TerrainRenderer implements IRendering{
 
     ShaderManager shader;
-    private List<Terrain> terrains;
+    public ArrayList<Terrain> terrains;
 
 
     public TerrainRenderer() throws Exception{
@@ -35,8 +35,8 @@ public class TerrainRenderer implements IRendering{
 
     @Override
     public void init() throws Exception {
-        shader.createVertexShader(Utils.loadResource("/resources/shaders/terrain_vertex.vs"));
-        shader.createFragmentShader(Utils.loadResource("/resources/shaders/terrain_fragment.fs"));
+        shader.createVertexShader(Utils.loadResource("/resources/shaders/terrainVertex.vs"));
+        shader.createFragmentShader(Utils.loadResource("/resources/shaders/terrainFragment.fs"));
         shader.link();
         shader.createUniform("textureSampler");
         shader.createUniform("transformationMatrix");
@@ -87,7 +87,7 @@ public class TerrainRenderer implements IRendering{
     @Override
     public void prepare(Object terrain, Camera camera) {
         shader.setUniform("textureSampler", 0);
-        shader.setUniform("transformationMatrix", Transformation.createTransformationMatrix((Terrain) terrains));
+        shader.setUniform("transformationMatrix", Transformation.createTransformationMatrix((Terrain) terrain));
         shader.setUniform("viewMatrix", Transformation.getViewMatrix(camera));
     }
 

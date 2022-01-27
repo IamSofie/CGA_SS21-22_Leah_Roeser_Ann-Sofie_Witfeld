@@ -90,7 +90,7 @@ public class ObjectLoader {
 
         int[] indicesArr = indices.stream().mapToInt((Integer v) -> v).toArray();
 
-        return loadModel(verticesArr, texCoordArr, normalArr, indicesArr);
+        return loadOBJModel(verticesArr, texCoordArr, normalArr, indicesArr);
     }
 
     private static void processVertex(int pos, int texCoord, int normal,
@@ -128,7 +128,7 @@ public class ObjectLoader {
         }
     }
 
-    public Model loadModel(float[] vertices, float[] textureCoords, float[] normals, int[] indices){
+    public Model loadOBJModel(float[] vertices, float[] textureCoords, float[] normals, int[] indices){
         int id = createVAO();
         storeIndicesBuffer(indices);
         storeDataInAttribList(0,3, vertices);
@@ -149,7 +149,7 @@ public class ObjectLoader {
 
             buffer = STBImage.stbi_load(filename, w, h, c, 4);
             if(buffer == null)
-                throw new Exception("Image File" + filename + "nicht geladen" + STBImage.stbi_failure_reason());
+                throw new Exception("Image File" + filename + "nicht geladen  " + STBImage.stbi_failure_reason());
 
             width = w.get();
             height= h.get();
