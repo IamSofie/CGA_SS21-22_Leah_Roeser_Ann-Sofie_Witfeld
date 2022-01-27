@@ -42,9 +42,13 @@ public class TestGame implements ILogic {
     public void init() throws Exception {
         renderer.init();
 
+
+        Model model1 = loader.loadOBJModel("/resources/models/cloud2.obj");
         Model model = loader.loadOBJModel("/resources/models/bunny.obj");
         model.getMaterial().setDisableCulling(true);
+        model1.getMaterial().setDisableCulling(true);
         model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")), 1f);
+        model1.setTexture(new Texture(loader.loadTexture("textures/cloud.png")), 1);
 
         Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/grasBlatt.png")), 0.1f));
         Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/grasBlumen.png")), 0.1f));
@@ -53,15 +57,15 @@ public class TestGame implements ILogic {
 
 
 
-       /* Random rnd = new Random();
+        Random rnd = new Random();
         for(int i = 0; i < 200; i++){
             float x = rnd.nextFloat() * 100 -50;
             float y = rnd.nextFloat() * 100 -50;
             float z = rnd.nextFloat() * -300;
 
-            sceneManager.addEntity(new Entity(model, new Vector3f(x,y,z),
+            sceneManager.addEntity(new Entity(model1, new Vector3f(x,y,z),
             new Vector3f(rnd.nextFloat() * 180, rnd.nextFloat() * 180, 0), 1));
-        }*/
+        }
         sceneManager.addEntity(new Entity(model, new Vector3f(0,-1, -2f), new Vector3f(0,0,0),0.1f));
 
 
