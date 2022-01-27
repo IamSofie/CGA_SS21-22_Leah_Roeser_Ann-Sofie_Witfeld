@@ -4,6 +4,7 @@ import com.sofie.core.ShaderManager;
 import com.sofie.core.WindowManager;
 import com.sofie.core.entity.Camera;
 import com.sofie.core.entity.Entity;
+import com.sofie.core.entity.SceneManager;
 import com.sofie.core.entity.terrain.Terrain;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.SpotLight;
@@ -49,15 +50,15 @@ public class RenderManager {
         shader.setUniform("directionalLight", directionalLight);
     }
 
-    public void render(Camera camera, DirectionalLight directionalLight,  PointLight[] pointLights, SpotLight[] spotLights){
+    public void render(Camera camera, SceneManager scene){
         clear();
         if(window.isResize()){
             GL11.glViewport(0,0,window.getWidth(), window.getWidth());
             window.setResize(false);
         }
 
-        entityRenderer.render(camera, pointLights, spotLights, directionalLight);
-        terrainRenderer.render(camera, pointLights, spotLights, directionalLight);
+        entityRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight());
+        terrainRenderer.render(camera, scene.getPointLights(), scene.getSpotLights(), scene.getDirectionalLight());
 
     }
 
