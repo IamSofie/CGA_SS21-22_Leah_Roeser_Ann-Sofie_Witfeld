@@ -12,7 +12,6 @@ import com.sofie.core.utils.Consts;
 import com.sofie.core.utils.Transformation;
 import com.sofie.core.utils.Utils;
 import com.sofie.test.Launcher;
-import groovyjarjarantlr4.v4.tool.ast.TerminalAST;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;

@@ -23,6 +23,7 @@ public class TestGame implements ILogic {
     private final WindowManager window;
     private SceneManager sceneManager;
 
+
     private final Camera camera;
 
     Vector3f cameraInc;
@@ -41,18 +42,18 @@ public class TestGame implements ILogic {
     public void init() throws Exception {
         renderer.init();
 
-        Model model = loader.loadOBJModel("/resources/models/cubee.obj");
+        Model model = loader.loadOBJModel("/resources/models/bunny.obj");
         model.getMaterial().setDisableCulling(true);
         model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")), 1f);
 
-        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
-        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
+        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/grasBlatt.png")), 0.1f));
+        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/grasBlumen.png")), 0.1f));
         sceneManager.addTerrain(terrain);
         sceneManager.addTerrain(terrain2);
 
 
 
-        Random rnd = new Random();
+       /* Random rnd = new Random();
         for(int i = 0; i < 200; i++){
             float x = rnd.nextFloat() * 100 -50;
             float y = rnd.nextFloat() * 100 -50;
@@ -60,8 +61,8 @@ public class TestGame implements ILogic {
 
             sceneManager.addEntity(new Entity(model, new Vector3f(x,y,z),
             new Vector3f(rnd.nextFloat() * 180, rnd.nextFloat() * 180, 0), 1));
-        }
-        sceneManager.addEntity(new Entity(model, new Vector3f(0,0, -2f), new Vector3f(0,0,0),1));
+        }*/
+        sceneManager.addEntity(new Entity(model, new Vector3f(0,-1, -2f), new Vector3f(0,0,0),0.1f));
 
 
         //point light
@@ -72,8 +73,8 @@ public class TestGame implements ILogic {
 
         //spot light
         Vector3f coneDir = new Vector3f(0,-50,0);
-        float cutoff = (float) Math.cos(Math.toRadians(140));
-        lightIntensity = 50000f;
+        float cutoff = (float) Math.cos(Math.toRadians(120));
+        lightIntensity = 1.0f;
         SpotLight spotLight = new SpotLight(new PointLight(lightColour, new Vector3f(0,0,-3.6f),
                 lightIntensity, 0,0,0.2f), coneDir, cutoff);
 
