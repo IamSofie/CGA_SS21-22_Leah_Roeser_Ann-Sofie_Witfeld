@@ -7,6 +7,7 @@ import com.sofie.core.entity.Model;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.PointLight;
 import com.sofie.core.lighting.SpotLight;
+import com.sofie.core.utils.Consts;
 import com.sofie.core.utils.Transformation;
 import com.sofie.core.utils.Utils;
 import com.sofie.test.Launcher;
@@ -19,12 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EntityRender implements IRendering{
+public class EntityRenderer implements IRendering{
 
     ShaderManager shader;
     private Map<Model, List<Entity>> entities;
 
-    public EntityRender() throws Exception{
+    public EntityRenderer() throws Exception{
         entities = new HashMap<>();
         shader = new ShaderManager();
     }
@@ -42,8 +43,8 @@ public class EntityRender implements IRendering{
         shader.createMaterialUniform("material");
         shader.createUniform("specularPower");
         shader.createDirectionalLightUniform("directionalLight");
-        shader.createPointLightListUniform("pointLights", 5);
-        shader.createSpotLightListUniform("spotLights", 5);
+        shader.createPointLightListUniform("pointLights", Consts.MAX_POINT_LIGHTS);
+        shader.createSpotLightListUniform("spotLights", Consts.MAX_SPOT_LIGHTS);
     }
 
     @Override

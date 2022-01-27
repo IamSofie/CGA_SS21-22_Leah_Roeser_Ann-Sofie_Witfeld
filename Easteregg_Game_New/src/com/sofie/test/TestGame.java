@@ -44,14 +44,14 @@ public class TestGame implements ILogic {
     public void init() throws Exception {
         renderer.init();
 
-        Model model = loader.loadOBJModel("/resources/models/bunny.obj");
-        model.setTexture(new Texture(loader.loadTexture("textures/blue.png")), 1f);
-
-
+        Model model = loader.loadOBJModel("/resources/models/cubee.obj");
+        model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")), 1f);
+        
         Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
         Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/gras.png")), 0.1f));
         sceneManager.addTerrain(terrain);
         sceneManager.addTerrain(terrain2);
+
 
 
         Random rnd = new Random();
@@ -59,10 +59,12 @@ public class TestGame implements ILogic {
             float x = rnd.nextFloat() * 100 -50;
             float y = rnd.nextFloat() * 100 -50;
             float z = rnd.nextFloat() * -300;
+
             sceneManager.addEntity(new Entity(model, new Vector3f(x,y,z),
             new Vector3f(rnd.nextFloat() * 180, rnd.nextFloat() * 180, 0), 1));
         }
         sceneManager.addEntity(new Entity(model, new Vector3f(0,0, -2f), new Vector3f(0,0,0),1));
+
 
         //point light
         float lightIntensity = 1.0f;

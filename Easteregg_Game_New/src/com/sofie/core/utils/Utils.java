@@ -12,6 +12,7 @@ import java.nio.IntBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Utils {
@@ -40,7 +41,7 @@ public class Utils {
 
     public static List<String> readAllLines(String fileName){
         List<String> list = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(Class.forName(Utils.class.getName()).getResourceAsStream(fileName)))){
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(Class.forName(Utils.class.getName()).getResourceAsStream(fileName))))){
             String line;
             while ((line= br.readLine()) != null){
                 list.add(line);
