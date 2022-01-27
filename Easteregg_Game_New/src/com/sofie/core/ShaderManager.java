@@ -83,7 +83,7 @@ public class ShaderManager {
         setUniform(uniformName + ".ambient", material.getAmbientColour());
         setUniform(uniformName + ".diffuse", material.getDiffuseColour());
         setUniform(uniformName + ".specular", material.getSpecularColour());
-        setUniform(uniformName + ".hasTexture", material.hasTexture());
+        setUniform(uniformName + ".hasTexture", material.hasTexture() ? 1 : 0);
         setUniform(uniformName + ".reflect", material.getReflect());
     }
 

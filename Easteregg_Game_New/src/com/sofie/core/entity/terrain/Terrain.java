@@ -58,7 +58,7 @@ public class Terrain {
                 indices[pointer++] = bottomRight;
             }
         }
-        return loader.loadOBJModel(vertices, textureCoords, normals, indices);
+        return loader.loadModel(vertices, textureCoords, normals, indices);
     }
 
     public Vector3f getPosition() {

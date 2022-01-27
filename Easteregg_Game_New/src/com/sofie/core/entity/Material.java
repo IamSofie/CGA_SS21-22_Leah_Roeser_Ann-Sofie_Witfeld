@@ -1,7 +1,6 @@
 package com.sofie.core.entity;
 
 import com.sofie.core.utils.Consts;
-import org.joml.Matrix4f;
 import org.joml.Vector4f;
 
 public class Material{

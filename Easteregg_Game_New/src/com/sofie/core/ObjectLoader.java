@@ -26,7 +26,6 @@ public class ObjectLoader {
 
     public Model loadOBJModel(String filename) {
         List<String> lines = Utils.readAllLines(filename);
-
         List<Vector3f> vertices = new ArrayList<>();
         List<Vector3f> normals = new ArrayList<>();
         List<Vector2f> textures = new ArrayList<>();
@@ -90,7 +89,7 @@ public class ObjectLoader {
 
         int[] indicesArr = indices.stream().mapToInt((Integer v) -> v).toArray();
 
-        return loadOBJModel(verticesArr, texCoordArr, normalArr, indicesArr);
+        return loadModel(verticesArr, texCoordArr, normalArr, indicesArr);
     }
 
     private static void processVertex(int pos, int texCoord, int normal,
@@ -128,7 +127,7 @@ public class ObjectLoader {
         }
     }
 
-    public Model loadOBJModel(float[] vertices, float[] textureCoords, float[] normals, int[] indices){
+    public Model loadModel(float[] vertices, float[] textureCoords, float[] normals, int[] indices){
         int id = createVAO();
         storeIndicesBuffer(indices);
         storeDataInAttribList(0,3, vertices);

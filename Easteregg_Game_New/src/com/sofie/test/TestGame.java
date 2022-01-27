@@ -12,9 +12,6 @@ import com.sofie.core.utils.Consts;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 
