@@ -105,7 +105,7 @@ public class TestGame implements ILogic {
         spotLight.getPointLight().setPosition((new Vector3f(0.5f,0.5f, -3.6f)));
 
         //directional light
-        lightPosition = new Vector3f(-1,-10,0);
+        lightPosition = new Vector3f(1,-10,0);
         lightColour = new Vector3f(1,1,1);
         sceneManager.setDirectionalLight(new DirectionalLight(lightColour, lightPosition, lightIntensity));
 
@@ -181,7 +181,7 @@ public class TestGame implements ILogic {
 
            sceneManager.incLightAngle(1.1f);
 
-           if(sceneManager.getLightAngle() > 90){
+         /*  if(sceneManager.getLightAngle() > 90){
                sceneManager.getDirectionalLight().setIntensity(0);
                if(sceneManager.getLightAngle() >= 360)
                    sceneManager.setLightAngle(-90);
@@ -196,7 +196,7 @@ public class TestGame implements ILogic {
             sceneManager.getDirectionalLight().getColour().x = 1;
             sceneManager.getDirectionalLight().getColour().y = 1;
             sceneManager.getDirectionalLight().getColour().z = 1;
-       }
+       }*/
        double angRad = Math.toRadians(sceneManager.getLightAngle());                      //cycle
         sceneManager.getDirectionalLight().getDirection().x = (float) Math.sin(angRad);
         sceneManager.getDirectionalLight().getDirection().y = (float) Math.cos(angRad);
