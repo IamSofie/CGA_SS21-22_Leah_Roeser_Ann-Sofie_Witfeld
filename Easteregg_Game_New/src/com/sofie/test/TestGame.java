@@ -2,7 +2,9 @@ package com.sofie.test;
 
 import com.sofie.core.*;
 import com.sofie.core.entity.*;
+import com.sofie.core.entity.terrain.BlendMapTerrain;
 import com.sofie.core.entity.terrain.Terrain;
+import com.sofie.core.entity.terrain.TerrainTexture;
 import com.sofie.core.lighting.DirectionalLight;
 import com.sofie.core.lighting.SpotLight;
 import com.sofie.core.lighting.PointLight;
@@ -11,6 +13,7 @@ import com.sofie.core.rendering.RenderManager;
 import com.sofie.core.utils.Consts;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 import java.util.Random;
 
@@ -50,10 +53,26 @@ public class TestGame implements ILogic {
         model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")), 1f);
         model1.setTexture(new Texture(loader.loadTexture("textures/cloud.png")), 1);
 
-        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/grasBlatt.png")), 0.1f));
-        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(new Texture(loader.loadTexture("textures/grasBlumen.png")), 0.1f));
+
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("textures/grasBlatt.png"));
+        TerrainTexture redTexture = new TerrainTexture(loader.loadTexture("textures/grasBlumen.png"));
+        TerrainTexture blueTexture = new TerrainTexture(loader.loadTexture("textures/stone.png"));
+        TerrainTexture greenTexture = new TerrainTexture(loader.loadTexture("textures/dirt.png"));
+        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("textures/blendmap.png"));
+
+        BlendMapTerrain blendMapTerrain = new BlendMapTerrain(backgroundTexture, blueTexture, redTexture, greenTexture);
+
+
+
+        Terrain terrain = new Terrain(new Vector3f(0, -1, -800), loader, new Material(
+                new Vector4f(0.0f, 0.0f,0.0f, 0.0f), 0.1f),blendMapTerrain, blendMap);
+
+        Terrain terrain2 = new Terrain(new Vector3f(-800, -1, -800), loader, new Material(
+                new Vector4f(0.0f,0.0f,0.0f,0.0f), 0.1f), blendMapTerrain, blendMap);
         sceneManager.addTerrain(terrain);
         sceneManager.addTerrain(terrain2);
+
+        //13:26 Video.
 
 
 

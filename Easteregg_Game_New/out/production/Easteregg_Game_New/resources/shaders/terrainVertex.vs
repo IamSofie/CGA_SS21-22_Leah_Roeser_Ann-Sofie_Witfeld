@@ -18,5 +18,5 @@
 
      fragNormal = normalize(worldPos).xyz;
      fragPos = worldPos.xyz;
-     fragTextureCoord = textureCoord / 2.5;
+     fragTextureCoord = textureCoord;
  }

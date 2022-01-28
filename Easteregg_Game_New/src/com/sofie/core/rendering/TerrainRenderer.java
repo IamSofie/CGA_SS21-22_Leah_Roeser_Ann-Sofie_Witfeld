@@ -37,7 +37,12 @@ public class TerrainRenderer implements IRendering{
         shader.createVertexShader(Utils.loadResource("/resources/shaders/terrainVertex.vs"));
         shader.createFragmentShader(Utils.loadResource("/resources/shaders/terrainFragment.fs"));
         shader.link();
-        shader.createUniform("textureSampler");
+        shader.createUniform("backgroundTexture");
+        shader.createUniform("blueTexture");
+        shader.createUniform("redTexture");
+        shader.createUniform("greenTexture");
+        shader.createUniform("blendMap");
+
         shader.createUniform("transformationMatrix");
         shader.createUniform("projectionMatrix");
         shader.createUniform("viewMatrix");
@@ -70,12 +75,15 @@ public class TerrainRenderer implements IRendering{
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
+        //RenderManager.enableCulling();
 
-        RenderManager.enableCulling();
-        
+        shader.setUniform("backgroundTexture", 0);
+        shader.setUniform("redTexture", 1);
+        shader.setUniform("greenTexture", 2);
+        shader.setUniform("blueTexture", 3);
+        shader.setUniform("blendMap", 4);
         shader.setUniform("material", model.getMaterial());
-        GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getId());
+
     }
 
     @Override
@@ -88,7 +96,22 @@ public class TerrainRenderer implements IRendering{
 
     @Override
     public void prepare(Object terrain, Camera camera) {
-        shader.setUniform("textureSampler", 0);
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Terrain)terrain).getBlendMapTerrain().getBackground().getId());
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE1);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Terrain)terrain).getBlendMapTerrain().getRedTexture().getId());
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE2);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Terrain)terrain).getBlendMapTerrain().getGreenTexture().getId());
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE3);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Terrain)terrain).getBlendMapTerrain().getBlueTexture().getId());
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE4);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, ((Terrain)terrain).getBlendMap().getId());
+
         shader.setUniform("transformationMatrix", Transformation.createTransformationMatrix((Terrain) terrain));
         shader.setUniform("viewMatrix", Transformation.getViewMatrix(camera));
     }
